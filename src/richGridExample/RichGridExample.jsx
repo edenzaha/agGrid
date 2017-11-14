@@ -59,10 +59,18 @@ export default class RichGridExample extends Component {
         this.onRowSelected = this.onRowSelected.bind(this);
         this.onCellClicked = this.onCellClicked.bind(this);
         this.getRowHeight = this.getRowHeight.bind(this);
+        this.onCellValueChanged = this.onCellValueChanged.bind(this);
+        this.cellEditingStopped = this.cellEditingStopped.bind(this);
     }
-
+    cellEditingStopped(params){
+        let x = 10;
+        let y =5;
+    }
     onToggleToolPanel(event) {
         this.setState({showToolPanel: event.target.checked});
+    }
+    onCellValueChanged(params){
+        params.api.resetRowHeights();
     }
     getRowHeight (params){
         let columns = this.gridOptions.columnApi.getAllColumns();
@@ -196,13 +204,13 @@ export default class RichGridExample extends Component {
                             // gridOptions is optional - it's possible to provide
                             // all values as React props
                             gridOptions={this.gridOptions}
-
+                            onCellValueChanged={this.onCellValueChanged}
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
-
+                            cellEditingStopped={this.cellEditingStopped}
                             // binding to simple properties
                             showToolPanel={this.state.showToolPanel}
                             quickFilterText={this.state.quickFilterText}
