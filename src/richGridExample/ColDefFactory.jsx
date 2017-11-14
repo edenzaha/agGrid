@@ -31,6 +31,7 @@ export default class ColDefFactory {
                         width: 150,
                         pinned: true,
                         editable: true,
+                        resizeable:true,
                         // use a React cellEditor
                         cellEditorFramework: NameCellEditor
                     },

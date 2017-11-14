@@ -58,12 +58,35 @@ export default class RichGridExample extends Component {
         this.onGridReady = this.onGridReady.bind(this);
         this.onRowSelected = this.onRowSelected.bind(this);
         this.onCellClicked = this.onCellClicked.bind(this);
+        this.getRowHeight = this.getRowHeight.bind(this);
     }
 
     onToggleToolPanel(event) {
         this.setState({showToolPanel: event.target.checked});
     }
-
+    getRowHeight (params){
+        let columns = this.gridOptions.columnApi.getAllColumns();
+        var maxHeight = 0;
+        for(var i=0;i<columns.length;i++){
+            //get column name
+            let colName = columns[i].colDef.field;
+            //check if column needs to be resized to fit text
+            let isResizeable = columns[i].colDef.resizeable;
+            if (isResizeable)
+            {
+                //get cell value
+                let value = params.api.getValue(colName, params.node);
+                if (value!=null){
+                    //get text height
+                    let textHeight = 18 * (Math.floor(value.length / 45) + 1) + 10;
+                    if (textHeight>maxHeight){
+                        maxHeight = textHeight;
+                    }
+                }   
+            }         
+        }
+        return Math.max(maxHeight,25);
+    } 
     onGridReady(params) {
         this.api = params.api;
         this.columnApi = params.columnApi;
@@ -100,7 +123,7 @@ export default class RichGridExample extends Component {
         let skillsFilter = this.api.getFilterInstance('skills');
         let componentInstance = skillsFilter.getFrameworkComponentInstance();
         componentInstance.helloFromSkillsFilter();
-    }
+    }  
 
     dobFilter() {
         let dateFilterComponent = this.gridOptions.api.getFilterInstance('dob');
@@ -175,6 +198,7 @@ export default class RichGridExample extends Component {
 
                             // listening for events
                             onGridReady={this.onGridReady}
+                            getRowHeight={this.getRowHeight}
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
 
