@@ -70,7 +70,7 @@ export default class RichGridExample extends Component {
         for(var i=0;i<columns.length;i++){
             //get column name
             let colName = columns[i].colDef.field;
-            //check if column needs to be resized to fit text
+            //check if column needs to be resized to fit text (the 'resizeable' was added by me to ColDefFactory.jsx)
             let isResizeable = columns[i].colDef.resizeable;
             if (isResizeable)
             {
@@ -79,12 +79,13 @@ export default class RichGridExample extends Component {
                 if (value!=null){
                     //get text height
                     let textHeight = 18 * (Math.floor(value.length / 45) + 1) + 10;
-                    if (textHeight>maxHeight){
+                    if (textHeight>maxHeight){ //if text height is bigger then the current max, then set it to be the current max
                         maxHeight = textHeight;
                     }
                 }   
             }         
         }
+        //return the maxHeight, if its lower then then 25 , then return 25
         return Math.max(maxHeight,25);
     } 
     onGridReady(params) {
