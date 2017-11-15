@@ -71,17 +71,42 @@ export default class RichGridExample extends Component {
         this.setState({showToolPanel: event.target.checked});
     }
     onCellValueChanged(params){
-        //params.api.resetRowHeights();
-        params.node.setRowHeight(100);
-        params.api.onRowHeightChanged();
+        if (params.colDef.resizeable){
+         
+            const height = 28 * (Math.floor(params.newValue.length / 45) + 1) + 10;
+            //update height array with new column height
+            params.node.columnsHeights[params.colDef.field] = height;
+
+            //iterate array of heights and find the max height
+            let max = 0;
+            let arr = params.node.columnsHeights;
+            for(var key in arr)
+            {
+                if (arr.hasOwnProperty(key)) {
+                    var val = arr[key];
+                    if (val>max)
+                    {
+                        max = val;
+                    }
+                }
+            }
+ 
+            if (max >= height)
+            {
+                params.node.setRowHeight(max);
+                params.api.onRowHeightChanged();
+            }
+        }        
     }
     getRowHeight (params){
         let columns = this.gridOptions.columnApi.getAllColumns();
         var maxHeight = 0;
-        let highestColumn = "";
+
+        let columnsHeights = [];
         for(var i=0;i<columns.length;i++){
             //get column name
             let colName = columns[i].colDef.field;
+          
             //check if column needs to be resized to fit text (the 'resizeable' was added by me to ColDefFactory.jsx)
             let isResizeable = columns[i].colDef.resizeable;
             if (isResizeable)
@@ -93,14 +118,15 @@ export default class RichGridExample extends Component {
                     let textHeight = 28 * (Math.floor(value.length / 45) + 1) + 10;
                     if (textHeight>maxHeight){ //if text height is bigger then the current max, then set it to be the current max
                         maxHeight = textHeight;
-                        highestColumn = colName;
                     }
+
+                    columnsHeights[colName]= textHeight;
                 }   
             }         
         }
         //return the maxHeight, if its lower then then 25 , then return 25
 
-        params.node.highestColumn = highestColumn;
+        params.node.columnsHeights = columnsHeights;
         return Math.max(maxHeight,25);
     } 
     onGridReady(params) {

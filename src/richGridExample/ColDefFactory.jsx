@@ -96,8 +96,8 @@ export default class ColDefFactory {
             {
                 headerName: 'Contact',
                 children: [
-                    {headerName: "Mobile", field: "mobile", width: 150, filter: 'text'},
-                    {headerName: "Land-line", field: "landline", width: 150, filter: 'text'},
+                    {headerName: "Mobile", resizeable:true,  editable: true, field: "mobile", width: 150, filter: 'text'},
+                    {headerName: "Land-line", resizeable:true, editable: true, field: "landline", width: 150, filter: 'text'},
                     {headerName: "Address", field: "address", width: 500, filter: 'text'}
                 ]
             }
