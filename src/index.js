@@ -11,8 +11,8 @@ import "../node_modules/bootstrap/dist/css/bootstrap.css";
 import App from "./App";
 
 // only required when using enterprise features
-// import {LicenseManager} from "ag-grid-enterprise/main";
-// LicenseManager.setLicenseKey("<your license key>");
+import {LicenseManager} from "ag-grid-enterprise/main";
+LicenseManager.setLicenseKey("ag-Grid_Evaluation_License_Not_For_Production_1Devs20_January_2018__MTUxNjQwNjQwMDAwMA==4091ca44a0ac9c86778d044f42c5edc1");
 
 document.addEventListener('DOMContentLoaded', () => {
     render(

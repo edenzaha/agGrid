@@ -61,6 +61,7 @@ export default class RichGridExample extends Component {
         this.getRowHeight = this.getRowHeight.bind(this);
         this.onCellValueChanged = this.onCellValueChanged.bind(this);
         this.cellEditingStopped = this.cellEditingStopped.bind(this);
+        this.getWidth = this.getWidth.bind(this);
     }
     cellEditingStopped(params){
         let x = 10;
@@ -86,7 +87,7 @@ export default class RichGridExample extends Component {
                 let value = params.api.getValue(colName, params.node);
                 if (value!=null){
                     //get text height
-                    let textHeight = 18 * (Math.floor(value.length / 45) + 1) + 10;
+                    let textHeight = 28 * (Math.floor(value.length / 45) + 1) + 10;
                     if (textHeight>maxHeight){ //if text height is bigger then the current max, then set it to be the current max
                         maxHeight = textHeight;
                     }
@@ -94,7 +95,7 @@ export default class RichGridExample extends Component {
             }         
         }
         //return the maxHeight, if its lower then then 25 , then return 25
-        return Math.max(maxHeight,25);
+        return Math.max(maxHeight,28);
     } 
     onGridReady(params) {
         this.api = params.api;
@@ -127,7 +128,10 @@ export default class RichGridExample extends Component {
             rowData: newRowData
         });
     }
-
+    getWidth(){
+        let width = document.getElementsByClassName("ag-fresh")[0].offsetWidth;
+        alert(width);
+    }
     invokeSkillsFilterMethod() {
         let skillsFilter = this.api.getFilterInstance('skills');
         let componentInstance = skillsFilter.getFrameworkComponentInstance();
@@ -163,6 +167,9 @@ export default class RichGridExample extends Component {
                             <button onClick={() => {
                                 this.refs.myGrid.api.selectAll()
                             }} className="btn btn-primary">Select All</button>
+
+                            <button onClick={() => {this.getWidth()}} className="btn btn-primary">Get Width</button>
+
                             <button onClick={this.deselectAll.bind(this)}
                                     className="btn btn-primary">Clear Selection</button>
                         </span>
