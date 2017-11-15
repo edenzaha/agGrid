@@ -70,11 +70,14 @@ export default class RichGridExample extends Component {
         this.setState({showToolPanel: event.target.checked});
     }
     onCellValueChanged(params){
-        params.api.resetRowHeights();
+        //params.api.resetRowHeights();
+        params.node.setRowHeight(100);
+        params.api.onRowHeightChanged();
     }
     getRowHeight (params){
         let columns = this.gridOptions.columnApi.getAllColumns();
         var maxHeight = 0;
+        let highestColumn = "";
         for(var i=0;i<columns.length;i++){
             //get column name
             let colName = columns[i].colDef.field;
@@ -89,11 +92,13 @@ export default class RichGridExample extends Component {
                     let textHeight = 18 * (Math.floor(value.length / 45) + 1) + 10;
                     if (textHeight>maxHeight){ //if text height is bigger then the current max, then set it to be the current max
                         maxHeight = textHeight;
+                        highestColumn = colName;
                     }
                 }   
             }         
         }
         //return the maxHeight, if its lower then then 25 , then return 25
+        params.node.highestColumn = highestColumn;
         return Math.max(maxHeight,25);
     } 
     onGridReady(params) {
