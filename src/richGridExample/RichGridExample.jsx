@@ -72,29 +72,31 @@ export default class RichGridExample extends Component {
     }
     onCellValueChanged(params){
         if (params.colDef.resizeable){
-         
+            
             const height = 28 * (Math.floor(params.newValue.length / 45) + 1) + 10;
-            //update height array with new column height
-            params.node.columnsHeights[params.colDef.field] = height;
+            //check previous column height with new calculated height, if its the same, then do nothing
+            if (height!=params.node.columnsHeights[params.colDef.field])
+            {                           
+                //update height array with new column height
+                params.node.columnsHeights[params.colDef.field] = height;
 
-            //iterate array of heights and find the max height
-            let max = 0;
-            let arr = params.node.columnsHeights;
-            for(var key in arr)
-            {
-                if (arr.hasOwnProperty(key)) {
-                    var val = arr[key];
-                    if (val>max)
-                    {
-                        max = val;
+                //iterate array of heights and find the max height
+                let max = 0;
+                let arr = params.node.columnsHeights;
+                for(var key in arr)
+                {
+                    if (arr.hasOwnProperty(key)) {
+                        var val = arr[key];
+                        if (val>max)
+                        {
+                            max = val;
+                        }
                     }
                 }
-            }
- 
-            if (max >= height)
-            {
+                 
                 params.node.setRowHeight(max);
                 params.api.onRowHeightChanged();
+                 
             }
         }        
     }
