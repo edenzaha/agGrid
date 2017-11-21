@@ -1,5 +1,6 @@
 import SkillsCellRenderer from './SkillsCellRenderer.jsx';
 import NameCellEditor from './NameCellEditor.jsx';
+import MyCellEditor from './MyTextEditor.jsx';
 import ProficiencyCellRenderer from './ProficiencyCellRenderer.jsx';
 import RefData from './RefData';
 import SkillsFilter from './SkillsFilter.jsx';
@@ -96,8 +97,8 @@ export default class ColDefFactory {
             {
                 headerName: 'Contact',
                 children: [
-                    {headerName: "Mobile", resizeable:true,  editable: true, field: "mobile", width: 150, filter: 'text'},
-                    {headerName: "Land-line", resizeable:true, editable: true, field: "landline", width: 150, filter: 'text'},
+                    {headerName: "Mobile",cellEditorFramework: MyCellEditor, resizeable:true,  editable: true, field: "mobile", width: 150, filter: 'text'},
+                    {headerName: "Land-line",cellEditorFramework: NameCellEditor, resizeable:true, editable: true, field: "landline", width: 150, filter: 'text'},
                     {headerName: "Address", field: "address", width: 500, filter: 'text'}
                 ]
             }
