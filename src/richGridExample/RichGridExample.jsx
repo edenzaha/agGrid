@@ -199,7 +199,7 @@ export default class RichGridExample extends Component {
                         <span>
                             Grid API:
                             <button onClick={() => {
-                                this.refs.myGrid.api.selectAll()
+                                this.input.api.selectAll()
                             }} className="btn btn-primary">Select All</button>
 
                             <button onClick={() => {this.getWidth()}} className="btn btn-primary">Get Width</button>
@@ -241,7 +241,7 @@ export default class RichGridExample extends Component {
                     </div>
                     <div style={{height: 400, width: 900}} className="ag-fresh">
                         <AgGridReact
-                            ref="myGrid"
+                            ref={(x)=>this.input = x}
                             // gridOptions is optional - it's possible to provide
                             // all values as React props
                             gridOptions={this.gridOptions}
