@@ -22,6 +22,7 @@ export default class ColDefFactory {
             },
             {
                 headerName: 'Employee',
+    
                 headerGroupComponentFramework: HeaderGroupComponent,
                 children: [
                     {
@@ -33,6 +34,8 @@ export default class ColDefFactory {
                         pinned: true,
                         editable: true,
                         resizeable:true,
+                        rowGroup: true,
+                        hide: true,
                         // use a React cellEditor
                         cellEditorFramework: NameCellEditor
                     },

@@ -62,6 +62,7 @@ export default class RichGridExample extends Component {
         this.onCellValueChanged = this.onCellValueChanged.bind(this);
         this.cellEditingStopped = this.cellEditingStopped.bind(this);
         this.getWidth = this.getWidth.bind(this);
+        this.rowGroupOpened = this.rowGroupOpened.bind(this);
     }
     cellEditingStopped(params){
         let x = 10;
@@ -111,11 +112,36 @@ export default class RichGridExample extends Component {
           
             //check if column needs to be resized to fit text (the 'resizeable' was added by me to ColDefFactory.jsx)
             let isResizeable = columns[i].colDef.resizeable;
+
             if (isResizeable)
             {
                 //get cell value
                 let value = params.api.getValue(colName, params.node);
-                if (value!=null){
+
+                //check if we are in "grouped" mode, if the row is a group, then we take the node.key, the node.key
+                //should fold the value by which we are grouping
+                let isGroupRow = params.node.group;
+                if (isGroupRow){
+                    value = params.node.key; //set the value we use to calculate height to the group key
+                }
+
+                //check if if we are in the column by which we are doing grouping, in this case, the value of the column will be empty, 
+                //in case the column value is empty we will not want to calculate the height , we will just want to set this column height to the default 
+                //height, in our case its 25 
+                let groupedColumns = this.gridOptions.columnApi.getRowGroupColumns();
+                let isGroupedColumn = false;
+                if (groupedColumns.length>0)
+                {
+                    let groupedCol = this.gridOptions.columnApi.getRowGroupColumns()[0].colDef.field;
+                    isGroupedColumn = groupedCol==colName;
+                }
+               
+
+                if (isGroupedColumn){
+                    //the value should be empty ,set default height
+                    columnsHeights[colName]= 25;
+                }
+                else if (value!=null){
                     //get text height
                     let textHeight = 28 * (Math.floor(value.length / 45) + 1) + 10;
                     if (textHeight>maxHeight){ //if text height is bigger then the current max, then set it to be the current max
@@ -124,6 +150,7 @@ export default class RichGridExample extends Component {
 
                     columnsHeights[colName]= textHeight;
                 }   
+
             }         
         }
         //return the maxHeight, if its lower then then 25 , then return 25
@@ -171,7 +198,9 @@ export default class RichGridExample extends Component {
         let componentInstance = skillsFilter.getFrameworkComponentInstance();
         componentInstance.helloFromSkillsFilter();
     }  
-
+    rowGroupOpened(params){
+        params.api.onRowHeightChanged();
+    }
     dobFilter() {
         let dateFilterComponent = this.gridOptions.api.getFilterInstance('dob');
         dateFilterComponent.setFilterType('equals');
@@ -184,7 +213,10 @@ export default class RichGridExample extends Component {
             this.gridOptions.api.onFilterChanged();
         }, 0)
     }
-
+    unGroup(){
+        this.columnApi.setRowGroupColumns([]);
+        this.api.resetRowHeights();
+    }
     render() {
         return (
             <div style={{width: '900px'}}>
@@ -198,6 +230,13 @@ export default class RichGridExample extends Component {
                     <div>
                         <span>
                             Grid API:
+
+                            <button onClick={() => {
+                                this.input.api.resetRowHeights()
+                            }} className="btn btn-primary">Redraw</button>
+
+                            <button onClick={this.unGroup.bind(this)} className="btn btn-primary">Ungroup</button>
+
                             <button onClick={() => {
                                 this.input.api.selectAll()
                             }} className="btn btn-primary">Select All</button>
@@ -249,6 +288,7 @@ export default class RichGridExample extends Component {
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
+                            onRowGroupOpened={this.rowGroupOpened}
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
                             cellEditingStopped={this.cellEditingStopped}

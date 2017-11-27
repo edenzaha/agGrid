@@ -2,13 +2,13 @@ export default class RefData {
 }
 
 RefData.FIRST_NAMES = [
-    "Sophie", "Isabelle", "Emily", "Olivia", "Lily", "Chloe", "Isabella",
+    "eden", "eden", "Emily", "Olivia", "Lily", "Chloe", "Isabella",
     "Amelia", "Jessica", "Sophia", "Ava", "Charlotte", "Mia", "Lucy", "Grace", "Ruby",
     "Ella", "Evie", "Freya", "Isla", "Poppy", "Daisy", "Layla"
 ];
 
 RefData.LAST_NAMES = [
-    "Sophie Beckham lkj lkj lkj ;l j;l kj;l kj ;lkjkllkj 12121 kj kj 12`312 132123 123 123 12 100", "Black", "Braxton", "Brennan", "Brock", "Bryson", "Cadwell",
+    "eden eden eden eden eden eden eden eden eden eden eden eden eden eden", "eden eden eden eden eden eden eden eden eden eden eden eden eden eden", "Braxton", "Brennan", "Brock", "Bryson", "Cadwell",
     "Cage", "Carson", "Chandler", "Cohen", "Cole", "Corbin", "Dallas", "Dalton", "Dane",
     "Donovan", "Easton", "Fisher", "Fletcher", "Grady", "Greyson", "Griffin", "Gunner",
     "Hayden", "Hudson", "Hunter", "Jacoby", "Jagger", "Jaxon", "Jett", "Kade", "Kane",
