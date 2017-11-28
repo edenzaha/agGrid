@@ -39,7 +39,10 @@ export default class ColDefFactory {
                         headerClass : "eden-class",
                         hide: true,
                         cellRenderer: function(params){
-                           return '<div class="long-column">' + params.value +'</div>';
+                            if (params.node.group)
+                                return '<div class="long-column">' + params.value +'</div>';
+                            else 
+                                return params.value;
                         },
                         // use a React cellEditor
                         cellEditorFramework: NameCellEditor
