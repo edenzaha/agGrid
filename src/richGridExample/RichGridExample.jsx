@@ -185,7 +185,7 @@ export default class RichGridExample extends Component {
     }
 
     onCellClicked(event) {
-        console.log('onCellClicked: ' + event.data.name + ', col ' + event.colIndex);
+        ///console.log('onCellClicked: ' + event.data.name + ', col ' + event.colIndex);
     }
 
     onRowSelected(event) {
@@ -306,12 +306,9 @@ export default class RichGridExample extends Component {
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
-<<<<<<< HEAD
-                            onRowGroupOpened={this.rowGroupOpened} //A row group was opened or closed.
-=======
+ 
                             getRowStyle={this.getRowStyle}
                             onRowGroupOpened={this.rowGroupOpened}
->>>>>>> 6659281ea5b0f021c8ae2fa31365ba1d0b552451
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
                             cellEditingStopped={this.cellEditingStopped}
