@@ -17,7 +17,7 @@ export default class RichGridExample extends Component {
         this.state = {
             quickFilterText: null,
             showToolPanel: false,
-            columnDefs: new ColDefFactory().createColDefs(),
+            columnDefs: new ColDefFactory().createColDefs(), 
             rowData: new RowDataFactory().createRowData(),
             icons: {
                 columnRemoveFromGroup: '<i class="fa fa-remove"/>',
@@ -218,6 +218,15 @@ export default class RichGridExample extends Component {
         this.columnApi.setRowGroupColumns([]);
         this.api.resetRowHeights();
     }
+    getRowStyle(params){
+        if (params.node.group)
+        {
+            return {class:"long-column"};
+        }        
+    }
+    defaultColGroupDef(params){
+        alert(2);
+    }
     render() {
         return (
             <div style={{width: '900px'}}>
@@ -289,11 +298,12 @@ export default class RichGridExample extends Component {
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
-                     
+                            getRowStyle={this.getRowStyle}
                             onRowGroupOpened={this.rowGroupOpened}
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
                             cellEditingStopped={this.cellEditingStopped}
+                   
                             // binding to simple properties
                             showToolPanel={this.state.showToolPanel}
                             quickFilterText={this.state.quickFilterText}
