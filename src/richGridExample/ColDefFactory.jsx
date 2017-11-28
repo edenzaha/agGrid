@@ -35,7 +35,6 @@ export default class ColDefFactory {
                         editable: true,
                         resizeable:true,
                         rowGroup: true,
-                        hide: true,
                         // use a React cellEditor
                         cellEditorFramework: NameCellEditor
                     },

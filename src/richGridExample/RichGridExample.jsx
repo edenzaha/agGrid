@@ -17,7 +17,7 @@ export default class RichGridExample extends Component {
         this.state = {
             quickFilterText: null,
             showToolPanel: false,
-            columnDefs: new ColDefFactory().createColDefs(),
+            columnDefs: new ColDefFactory().createColDefs(), 
             rowData: new RowDataFactory().createRowData(),
             icons: {
                 columnRemoveFromGroup: '<i class="fa fa-remove"/>',
@@ -101,6 +101,7 @@ export default class RichGridExample extends Component {
             }
         }        
     }
+ 
     getRowHeight (params){
         let columns = this.gridOptions.columnApi.getAllColumns();
         var maxHeight = 0;
@@ -225,6 +226,9 @@ export default class RichGridExample extends Component {
         this.columnApi.setRowGroupColumns([]);
         this.api.resetRowHeights();
     }
+    defaultColGroupDef(params){
+        alert(2);
+    }
     render() {
         return (
             <div style={{width: '900px'}}>
@@ -296,10 +300,16 @@ export default class RichGridExample extends Component {
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
+<<<<<<< HEAD
                             onRowGroupOpened={this.rowGroupOpened} //A row group was opened or closed.
+=======
+                            getRowStyle={this.getRowStyle}
+                            onRowGroupOpened={this.rowGroupOpened}
+>>>>>>> 6659281ea5b0f021c8ae2fa31365ba1d0b552451
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
                             cellEditingStopped={this.cellEditingStopped}
+                   
                             // binding to simple properties
                             showToolPanel={this.state.showToolPanel}
                             quickFilterText={this.state.quickFilterText}
