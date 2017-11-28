@@ -35,7 +35,12 @@ export default class ColDefFactory {
                         editable: true,
                         resizeable:true,
                         rowGroup: true,
+                        cellClass :"eden-class",
+                        headerClass : "eden-class",
                         hide: true,
+                        cellRenderer: function(params){
+                           return '<div class="long-column">' + params.value +'</div>';
+                        },
                         // use a React cellEditor
                         cellEditorFramework: NameCellEditor
                     },

@@ -101,6 +101,7 @@ export default class RichGridExample extends Component {
             }
         }        
     }
+ 
     getRowHeight (params){
         let columns = this.gridOptions.columnApi.getAllColumns();
         var maxHeight = 0;
@@ -288,6 +289,7 @@ export default class RichGridExample extends Component {
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
+                     
                             onRowGroupOpened={this.rowGroupOpened}
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
