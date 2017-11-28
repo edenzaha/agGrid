@@ -13,11 +13,11 @@ export default class NameCellEditor extends React.Component {
         // the entire ag-Grid properties are passed as one single object inside the params
         this.state = this.createInitialState(props);
 
-        this.onKeyPressed = this.onKeyPressed.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
        
     }
     componentDidMount() {
-         this.refs.textField.addEventListener('keydown', this.onKeyPressed);
+         this.refs.textField.addEventListener('keydown', this.onKeyDown);
     }
     // work out how to present the data based on what the user hit. you don't need to do any of
     // this for your ag-Grid cellEditor to work, however it makes sense to do this so the user
@@ -50,12 +50,10 @@ export default class NameCellEditor extends React.Component {
             highlightAllOnFocus: highlightAllOnFocus
         }
     }
-   onKeyPressed(e){
-        e.stopPropagation();
-      
-        if(e.keyCode == 13)
+   onKeyDown(e){          
+        if(e.keyCode == 13) //ENTER
         {
-            
+            e.stopPropagation();
         };
    }
     render() {
