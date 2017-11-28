@@ -35,6 +35,14 @@ export default class ColDefFactory {
                         editable: true,
                         resizeable:true,
                         rowGroup: true,
+                        cellClass :"long-column",
+                        hide: true,                      
+                        cellRenderer: function(params){
+                            if (params.node.group)
+                                return '<div class="long-column">' + params.value +'</div>';
+                            else 
+                                return params.value;
+                        },                     
                         // use a React cellEditor
                         cellEditorFramework: NameCellEditor
                     },

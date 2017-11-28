@@ -226,6 +226,12 @@ export default class RichGridExample extends Component {
         this.columnApi.setRowGroupColumns([]);
         this.api.resetRowHeights();
     }
+    getRowStyle(params){
+        if (params.node.group)
+        {
+            return {class:"long-column"};
+        }        
+    }
     defaultColGroupDef(params){
         alert(2);
     }
