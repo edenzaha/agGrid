@@ -122,7 +122,13 @@ export default class RichGridExample extends Component {
                 //should fold the value by which we are grouping
                 let isGroupRow = params.node.group;
                 if (isGroupRow){
-                    value = params.node.key; //set the value we use to calculate height to the group key
+
+                    if (params.node.heightCalculated) //if we already calcualted the height of the grouped row, then break loop
+                    {
+                        break;
+                    }
+                    value = params.node.key; //set the value we use to calculate height to the group key    
+                    params.node.heightCalculated = true;  //indicate that we already calculated height for this grouped row
                 }
 
                 //check if if we are in the column by which we are doing grouping, in this case, the value of the column will be empty, 
@@ -137,7 +143,7 @@ export default class RichGridExample extends Component {
                 }
                
 
-                if (isGroupedColumn){
+                if (isGroupedColumn && !isGroupRow){
                     //the value should be empty ,set default height
                     columnsHeights[colName]= 25;
                 }
@@ -149,6 +155,8 @@ export default class RichGridExample extends Component {
                     }
 
                     columnsHeights[colName]= textHeight;
+
+ 
                 }   
 
             }         
@@ -288,7 +296,7 @@ export default class RichGridExample extends Component {
                             // listening for events
                             onGridReady={this.onGridReady}
                             getRowHeight={this.getRowHeight}
-                            onRowGroupOpened={this.rowGroupOpened}
+                            onRowGroupOpened={this.rowGroupOpened} //A row group was opened or closed.
                             onRowSelected={this.onRowSelected}
                             onCellClicked={this.onCellClicked}
                             cellEditingStopped={this.cellEditingStopped}
@@ -298,11 +306,11 @@ export default class RichGridExample extends Component {
 
                             // binding to an object property
                             icons={this.state.icons}
-
+                            //groupUseEntireRow="true"
                             // binding to array properties
                             columnDefs={this.state.columnDefs}
                             rowData={this.state.rowData}
-
+                       
                             // no binding, just providing hard coded strings for the properties
                             suppressRowClickSelection="true"
                             rowSelection="multiple"
