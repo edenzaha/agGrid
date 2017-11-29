@@ -208,7 +208,12 @@ export default class RichGridExample extends Component {
         componentInstance.helloFromSkillsFilter();
     }  
     rowGroupOpened(params){
-        params.api.onRowHeightChanged();
+        var rows = params.node.childrenAfterGroup;
+        for(var i=0;i<rows.length;i++)
+        {
+            rows[i].setRowHeight();
+        }
+        //params.api.onRowHeightChanged();
     }
     dobFilter() {
         let dateFilterComponent = this.gridOptions.api.getFilterInstance('dob');
