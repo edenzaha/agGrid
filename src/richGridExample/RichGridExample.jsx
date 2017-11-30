@@ -123,7 +123,13 @@ export default class RichGridExample extends Component {
                 //should fold the value by which we are grouping
                 let isGroupRow = params.node.group;
                 if (isGroupRow){
-                    value = params.node.key; //set the value we use to calculate height to the group key
+
+                    if (params.node.heightCalculated) //if we already calcualted the height of the grouped row, then break loop
+                    {
+                        break;
+                    }
+                    value = params.node.key; //set the value we use to calculate height to the group key    
+                    params.node.heightCalculated = true;  //indicate that we already calculated height for this grouped row
                 }
 
                 //check if if we are in the column by which we are doing grouping, in this case, the value of the column will be empty, 
@@ -138,7 +144,7 @@ export default class RichGridExample extends Component {
                 }
                
 
-                if (isGroupedColumn){
+                if (isGroupedColumn && !isGroupRow){
                     //the value should be empty ,set default height
                     columnsHeights[colName]= 25;
                 }
@@ -150,6 +156,8 @@ export default class RichGridExample extends Component {
                     }
 
                     columnsHeights[colName]= textHeight;
+
+ 
                 }   
 
             }         
@@ -178,7 +186,7 @@ export default class RichGridExample extends Component {
     }
 
     onCellClicked(event) {
-        console.log('onCellClicked: ' + event.data.name + ', col ' + event.colIndex);
+        ///console.log('onCellClicked: ' + event.data.name + ', col ' + event.colIndex);
     }
 
     onRowSelected(event) {
@@ -201,7 +209,12 @@ export default class RichGridExample extends Component {
         componentInstance.helloFromSkillsFilter();
     }  
     rowGroupOpened(params){
-        params.api.onRowHeightChanged();
+        var rows = params.node.childrenAfterGroup;
+        for(var i=0;i<rows.length;i++)
+        {
+            rows[i].setRowHeight();
+        }
+        //params.api.onRowHeightChanged();
     }
     dobFilter() {
         let dateFilterComponent = this.gridOptions.api.getFilterInstance('dob');
@@ -289,6 +302,47 @@ export default class RichGridExample extends Component {
                             </button>
                         </div>
                     </div>
+<<<<<<< HEAD
+=======
+                    <div style={{height: 400, width: 900}} className="ag-fresh">
+                        <AgGridReact
+                            ref={(x)=>this.input = x}
+                            // gridOptions is optional - it's possible to provide
+                            // all values as React props
+                            gridOptions={this.gridOptions}
+                            onCellValueChanged={this.onCellValueChanged}
+                            // listening for events
+                            onGridReady={this.onGridReady}
+                            getRowHeight={this.getRowHeight}
+ 
+                            getRowStyle={this.getRowStyle}
+                            onRowGroupOpened={this.rowGroupOpened}
+                            onRowSelected={this.onRowSelected}
+                            onCellClicked={this.onCellClicked}
+                            cellEditingStopped={this.cellEditingStopped}
+                   
+                            // binding to simple properties
+                            showToolPanel={this.state.showToolPanel}
+                            quickFilterText={this.state.quickFilterText}
+
+                            // binding to an object property
+                            icons={this.state.icons}
+                            //groupUseEntireRow="true"
+                            // binding to array properties
+                            columnDefs={this.state.columnDefs}
+                            rowData={this.state.rowData}
+                       
+                            // no binding, just providing hard coded strings for the properties
+                            suppressRowClickSelection="true"
+                            rowSelection="multiple"
+                            enableColResize="true"
+                            enableSorting="true"
+                            enableFilter="true"
+                            groupHeaders="true"
+                            rowHeight="22"
+                        />
+                    </div>
+>>>>>>> cd6aeb3eac05a4cc585b20c11b3ae5bc540ccfa8
                     <div>
                         <div className="row">
                             <div className="col-sm-12"><h1>Rich Grid Example</h1></div>
