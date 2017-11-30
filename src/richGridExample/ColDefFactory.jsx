@@ -31,6 +31,7 @@ export default class ColDefFactory {
                         enableRowGroup: true,
                         enablePivot: true,
                         //width: 250,
+                        
                         pinned: true,
                         editable: true,
                         resizeable:true,

@@ -19,6 +19,10 @@ export default class RichGridExample extends Component {
             showToolPanel: false,
             columnDefs: new ColDefFactory().createColDefs(), 
             rowData: new RowDataFactory().createRowData(),
+            //autoColumnGroupDef: { width: 500,suppressSizeToFit:true},
+            groupColumnDef: {
+                minWidth:500
+            },
             icons: {
                 columnRemoveFromGroup: '<i class="fa fa-remove"/>',
                 filter: '<i class="fa fa-filter"/>',
@@ -238,9 +242,7 @@ export default class RichGridExample extends Component {
             return {class:"long-column"};
         }        
     }
-    defaultColGroupDef(params){
-        
-    }
+ 
     render() {
         return (
             <div style={{width: '100%'}}>
@@ -302,47 +304,6 @@ export default class RichGridExample extends Component {
                             </button>
                         </div>
                     </div>
-<<<<<<< HEAD
-=======
-                    <div style={{height: 400, width: 900}} className="ag-fresh">
-                        <AgGridReact
-                            ref={(x)=>this.input = x}
-                            // gridOptions is optional - it's possible to provide
-                            // all values as React props
-                            gridOptions={this.gridOptions}
-                            onCellValueChanged={this.onCellValueChanged}
-                            // listening for events
-                            onGridReady={this.onGridReady}
-                            getRowHeight={this.getRowHeight}
- 
-                            getRowStyle={this.getRowStyle}
-                            onRowGroupOpened={this.rowGroupOpened}
-                            onRowSelected={this.onRowSelected}
-                            onCellClicked={this.onCellClicked}
-                            cellEditingStopped={this.cellEditingStopped}
-                   
-                            // binding to simple properties
-                            showToolPanel={this.state.showToolPanel}
-                            quickFilterText={this.state.quickFilterText}
-
-                            // binding to an object property
-                            icons={this.state.icons}
-                            //groupUseEntireRow="true"
-                            // binding to array properties
-                            columnDefs={this.state.columnDefs}
-                            rowData={this.state.rowData}
-                       
-                            // no binding, just providing hard coded strings for the properties
-                            suppressRowClickSelection="true"
-                            rowSelection="multiple"
-                            enableColResize="true"
-                            enableSorting="true"
-                            enableFilter="true"
-                            groupHeaders="true"
-                            rowHeight="22"
-                        />
-                    </div>
->>>>>>> cd6aeb3eac05a4cc585b20c11b3ae5bc540ccfa8
                     <div>
                         <div className="row">
                             <div className="col-sm-12"><h1>Rich Grid Example</h1></div>
@@ -487,10 +448,10 @@ export default class RichGridExample extends Component {
                             // binding to simple properties
                             showToolPanel={this.state.showToolPanel}
                             quickFilterText={this.state.quickFilterText}
-
+                            //autoColumnGroupDef={this.state.autoColumnGroupDef}
                             // binding to an object property
                             icons={this.state.icons}
-
+                            groupUseEntireRow={true}
                             // binding to array properties
                             columnDefs={this.state.columnDefs}
                             rowData={this.state.rowData}
