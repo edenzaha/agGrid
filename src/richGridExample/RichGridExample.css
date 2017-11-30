@@ -33,3 +33,6 @@ label {
 .long-column {
     display: inline;
 }
+#gridContainer {
+    float: none !important;
+}

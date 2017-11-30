@@ -30,7 +30,7 @@ export default class ColDefFactory {
                         field: "name",
                         enableRowGroup: true,
                         enablePivot: true,
-                        width: 150,
+                        //width: 250,
                         pinned: true,
                         editable: true,
                         resizeable:true,
@@ -49,7 +49,7 @@ export default class ColDefFactory {
                     {
                         headerName: "Country",
                         field: "country",
-                        width: 150,
+                        //width: 150,
                         enableRowGroup: true,
                         enablePivot: true,
                         // an example of using a non-React cell renderer
@@ -63,7 +63,7 @@ export default class ColDefFactory {
                     {
                         headerName: "DOB",
                         field: "dob",
-                        width: 110,
+                       // width: 110,
                         enableRowGroup: true,
                         enablePivot: true,
                         filter: 'date',
@@ -82,7 +82,7 @@ export default class ColDefFactory {
                 children: [
                     {
                         headerName: "Skills",
-                        width: 125,
+                        //width: 125,
                         suppressSorting: true,
                         field: 'skills',
                         enableRowGroup: true,
@@ -95,7 +95,7 @@ export default class ColDefFactory {
                     {
                         headerName: "Proficiency",
                         field: "proficiency",
-                        width: 135,
+                        //width: 135,
                         enableValue: true,
                         // supply a React component
                         cellRendererFramework: ProficiencyCellRenderer,
@@ -107,9 +107,9 @@ export default class ColDefFactory {
             {
                 headerName: 'Contact',
                 children: [
-                    {headerName: "Mobile",cellEditorFramework: MyCellEditor, resizeable:true,  editable: true, field: "mobile", width: 150, filter: 'text'},
-                    {headerName: "Land-line",cellEditorFramework: NameCellEditor, resizeable:true, editable: true, field: "landline", width: 150, filter: 'text'},
-                    {headerName: "Address", field: "address", width: 500, filter: 'text'}
+                    {headerName: "Mobile",cellEditorFramework: MyCellEditor, resizeable:true,  editable: true, field: "mobile", filter: 'text'},
+                    {headerName: "Land-line",cellEditorFramework: NameCellEditor, resizeable:true, editable: true, field: "landline",  filter: 'text'},
+                    {headerName: "Address", field: "address", filter: 'text'}
                 ]
             }
         ];

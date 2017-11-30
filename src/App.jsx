@@ -40,7 +40,7 @@ class App extends Component {
         return (
             <div style={{display: "inline-block", width: "100%"}}>
                 <SideBar/>
-                <div style={{float: "left"}}>
+                <div id="gridContainer" style={{float: "left"}}>
                     <Switch>
                         <Redirect from="/" exact to="/rich-grid"/>
                         <Route exact path='/rich-grid' component={RichGridExample}/>
