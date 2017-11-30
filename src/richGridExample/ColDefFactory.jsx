@@ -54,6 +54,7 @@ export default class ColDefFactory {
                         enablePivot: true,
                         // an example of using a non-React cell renderer
                         cellRenderer: countryCellRenderer,
+                        pinned: false,
                         filterParams: {
                             cellRenderer: countryCellRenderer,
                             cellHeight: 20
